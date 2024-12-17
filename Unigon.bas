@@ -19,7 +19,7 @@
 140 NEXT l
 
 270 IF INKEY$<>"" THEN GOTO 270 'clear keyboard buffer
-280 C=15:X=18:Y=180:A$="> (c)Comissar 2024, v0.08 <":GOSUB 1590
+280 C=15:X=18:Y=180:A$="> (c)Comissar 2024, v0.09 <":GOSUB 1590
 285 LINE (170,180)-(175,182),4,BF
 287 LINE (170,183)-(175,185),10,BF
 
@@ -64,7 +64,8 @@
 686 next sj,si: if ra=0 goto 700 ' field with no moves 
 690 rm=1:v=6:gosub 1010:gosub 1670
 695 v=6-CP%:gosub 1000:gosub 1670 
-697 A$=INKEY$:IF A$="" AND RS%(1,2)=0 AND RS%(2,2)=0 AND RS%(3,2)=0 AND RS%(4,2)=0 THEN GOTO 690 ELSE IF A$<>" " AND ASC(A$)<>13 AND ASC(A$)<>27 AND RS%(1,2)=0 AND RS%(2,2)=0 THEN 700 else si=i: sj=j:GOTO 710
+697 A$=INKEY$:IF A$="" AND RS%(1,2)=0 AND RS%(2,2)=0 AND RS%(3,2)=0 AND RS%(4,2)=0 THEN GOTO 690 ELSE IF A$<>" " AND ASC(A$)<>13 AND ASC(A$)<>27 AND RS%(1,2)=0 AND RS%(2,2)=0 THEN 698 else si=i: sj=j:GOTO 710
+698 if asc(A$)=29 then i=i-1:j=j-1 else if asc(A$)=28 then i=i+1:j=j-1 else if asc(a$)=30 then j=j-2 
 700 next j, i: if rm=0 then LINE (60,60)-(200,90),0,BF:LINE (60,60)-(200,90),15,B:X=80:Y=72:A$="Player"+STR$(EP%)+" win!":GOSUB 1590:COPY(80,72)-STEP(100,12) TO (79,72),,TPSET: gosub 2000:cls: goto 105  ' cc% loser
 705 goto 670
 710 if ASC(A$)=27 then cls: goto 105
@@ -84,7 +85,8 @@
 900 if grid%(i,j) <> 3 and grid%(i,j)<>10 then goto 920
 910 rm=1:c=0:v=6:gosub 1010:gosub 1670
 912 c=grid%(i,j):v=(c-3)/7+2:gosub 1010:gosub 1670
-915 A$=INKEY$:IF A$="" AND RS%(1,2)=0 AND RS%(2,2)=0 AND RS%(3,2)=0 AND RS%(4,2)=0 THEN GOTO 910 ELSE IF A$<>" " AND ASC(A$)<>13 AND ASC(A$)<>27 AND RS%(1,2)=0 AND RS%(2,2)=0 THEN 920 else ei=i: ej=j: ec=grid%(i,j):GOTO 940
+915 A$=INKEY$:IF A$="" AND RS%(1,2)=0 AND RS%(2,2)=0 AND RS%(3,2)=0 AND RS%(4,2)=0 THEN GOTO 910 ELSE IF A$<>" " AND ASC(A$)<>13 AND ASC(A$)<>27 AND RS%(1,2)=0 AND RS%(2,2)=0 THEN 917 else ei=i: ej=j: ec=grid%(i,j):GOTO 940
+917 if asc(A$)=29 then i=i-1:j=j-1 else if asc(A$)=28 then i=i+1:j=j-1 else if asc(a$)=30 then j=j-2 
 920 next j, i: if rm=0 goto 665 'no moves fron that position
 930 goto 890
 940 grid%(i,j)=CC%:v=6-CP%:gosub 1000: fl%(CP%)=fl%(CP%)+1:if ASC(A$)=27 then cls: goto 105
@@ -165,7 +167,7 @@
 2000 a$=inkey$:if a$="" then 2000 else return
 
 3000 'SUB PrintPoints(fl%())
-3005 c=15:x=60:y=205:a$=STR$(fl%(1)) + "            " + STR$(fl%(2)):gosub 1590
+3005 c=4:x=60:y=205:a$=STR$(fl%(1)):gosub 1590:c=8:x=160:y=205:a$=STR$(fl%(2)):gosub 1590
 3010 RETURN
 
 4000 data 5,3, 5,4, 5,5, 5,6, 5,7, 7,7, 6,7, 6,6, 7,6, 7,5, 7,4, 7,3
